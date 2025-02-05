@@ -19,8 +19,7 @@ public class DNA {
 	{
 		input = null;
 		inFileName = new String("Original.txt");
-		outFileName = new String("DNA.txt");
-
+		
 	}
 	public static void main(String[] args)
 	{
@@ -48,88 +47,85 @@ public class DNA {
 	}
 	public void makeIt()
 	{
-		File outFile = new File("DNA.txt");
+		File outFileDNA = new File("DNA.txt");
 		try
 		{
-			outputDNA = new PrintWriter(outFile);
+			outputDNA = new PrintWriter(outFileDNA);
 		}
 		catch (IOException e)
 		{
-			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
-					" file.\n\n\n");
+			System.err.println("\n\n\nERROR: Cannot create " + outFileDNA + " file.\n\n\n");
 			System.exit(2);
 		}
-		File outFileA = new File("RNA.txt");
+		File outFileRNA = new File("RNA.txt");
 		try
 		{
-			outputRNA = new PrintWriter(outFileA);
+			outputRNA = new PrintWriter(outFileRNA);
 		}
 		catch (IOException e)
 		{
-			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
-					" file.\n\n\n");
-			System.exit(2);
+			System.err.println("\n\n\nERROR: Cannot create " + outFileRNA + " file.\n\n\n");
+			System.exit(3);
 		}
-		File outFileB = new File("protein.txt");
+		File outFileProtein = new File("protein.txt");
 		try
 		{
-			outputProtein = new PrintWriter(outFileB);
+			outputProtein = new PrintWriter(outFileProtein);
 		}
 		catch (IOException e)
 		{
-			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
-					" file.\n\n\n");
-			System.exit(2);
+			System.err.println("\n\n\nERROR: Cannot create " + outFileProtein + " file.\n\n\n");
+			System.exit(4);
 		}
 	}
 	public void getWords()
 	{
 		System.out.println("\n\n\n");
-		boolean M = false;
-		boolean U = false;
+		boolean protein = false;
+		boolean RNA = false;
 		String number;
 
 		while (input.hasNext())
 		{
 			number = input.next();
-			number = number.charAt(0)+"";
+			number = number.charAt(0) +  "";
 			letters = Integer.parseInt(number);
 
 			word = input.nextLine();
 			word.trim();
-			for(int i =0; i < word.length(); i++)
+			for(int i = 0; i < word.length(); i++)
 			{
 				if (word.charAt(i)=='M')
 				{
-					M = true;
+					protein= true;
 					
 				}
-				else if (word.charAt(i)=='U')
+				else if (word.charAt(i) == 'U')
 				{
-					U = true;
+					RNA = true;
 					
 				}
 
 			}
 			
-			if (M)
+			if (protein)
 			{
-				outputProtein.printf("%-5s",genes[letters]+": ");
+				outputProtein.printf("%-5s", genes[letters] + ": ");
 				outputProtein.println(word);
 			}
-			else if(U)
+			else if(RNA)
 			{
-				outputRNA.printf("%-5s",genes[letters]+": ");
+				outputRNA.printf("%-5s",genes[letters] + ": ");
 				outputRNA.println(word);
 			}
 			else
 			{
-				outputDNA.printf("%-5s",genes[letters]+": ");
+				outputDNA.printf("%-5s",genes[letters] + ": ");
 				outputDNA.println(word);
 			}
 
-			M = false;
-			U = false;
+			protein = false;
+			RNA = false;
 
 		}
 		outputDNA.close();
