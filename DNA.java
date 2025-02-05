@@ -83,13 +83,13 @@ public class DNA {
 		System.out.println("\n\n\n");
 		boolean protein = false;
 		boolean RNA = false;
-		String number;
+		String num;
 
 		while (input.hasNext())
 		{
-			number = input.next();
-			number = number.charAt(0) +  "";
-			letters = Integer.parseInt(number);
+			num = input.next();
+			num = num.charAt(0) +  "";
+			letters = Integer.parseInt(num);
 
 			word = input.nextLine();
 			word.trim();
