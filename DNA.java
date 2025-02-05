@@ -28,14 +28,10 @@ public class DNA {
 		d.runIt();
 	}
 	public void runIt()
-
 	{
-
 		openIt(); 	
 		makeIt();
 		getWords();
-
-
 	}
 	public void openIt()
 	{
@@ -141,9 +137,4 @@ public class DNA {
 		outputProtein.close();
 
 	}
-
-
-
-
-
 }
