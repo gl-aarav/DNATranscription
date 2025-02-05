@@ -1,43 +1,148 @@
-import java.io.*;
+
 import java.util.Scanner;
+import java.io.*;
+public class DNA {
+	private Scanner input; 
+	private PrintWriter outputDNA; 
+	private PrintWriter outputRNA; 
+	private PrintWriter outputProtein;
 
-public class DNA 
-{
-	public static void main(String[] args) 
+	private String inFileName; 
+	private String outFileName; 
+	int letters;
+	String[] genes = {"rol","try","cod","Pil","dig","tal","mv"};
+	String word = "";
+	public DNA()
 	{
-		DNA dna = new DNA();
-		dna.runIt();
+		input = null;
+		inFileName = new String("Original.txt");
+		outFileName = new String("DNA.txt");
+
 	}
-
-	public void runIt() 
+	public static void main(String[] args)
 	{
-		try 
+		DNA d = new DNA();
+		d.runIt();
+
+
+	}
+	public void runIt()
+
+	{
+
+		openIt(); 	
+		makeIt();
+		getWords();
+
+
+	}
+	public void openIt()
+	{
+		File inFile = new File(inFileName);
+		try
 		{
-			String[] genes = {"rol", "try", "cod", "Pil", "dig", "tal", "mv"};
-			Scanner scanner = new Scanner(new File("Original.txt"));
-			FileWriter dna = new FileWriter("DNA.txt");
-			FileWriter rna = new FileWriter("RNA.txt");
-			FileWriter protein = new FileWriter("protein.txt");
+			input = new Scanner(inFile);
+		}
+		catch(FileNotFoundException e)
+		{
+			System.err.printf("\n\n\nERROR: Cannot find/open file %s.\n\n\n",inFileName);
+			System.exit(1);
+		}
+	}
+	public void makeIt()
+	{
+		File outFile = new File("DNA.txt");
+		try
+		{
+			outputDNA = new PrintWriter(outFile);
+		}
+		catch (IOException e)
+		{
+			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
+					" file.\n\n\n");
+			System.exit(2);
+		}
+		File outFileA = new File("RNA.txt");
+		try
+		{
+			outputRNA = new PrintWriter(outFileA);
+		}
+		catch (IOException e)
+		{
+			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
+					" file.\n\n\n");
+			System.exit(2);
+		}
+		File outFileB = new File("protein.txt");
+		try
+		{
+			outputProtein = new PrintWriter(outFileB);
+		}
+		catch (IOException e)
+		{
+			System.err.println("\n\n\nERROR: Cannot create " + outFileName + 
+					" file.\n\n\n");
+			System.exit(2);
+		}
+	}
+	public void getWords()
+	{
+		System.out.println("\n\n\n");
+		boolean M = false;
+		boolean U = false;
+		String number;
 
-			while (scanner.hasNextLine()) 
+		while (input.hasNext())
+		{
+			number = input.next();
+			number = number.charAt(0)+"";
+			letters = Integer.parseInt(number);
+
+			word = input.nextLine();
+			word.trim();
+			for(int i =0; i < word.length(); i++)
 			{
-				String line = scanner.nextLine();
-				String sequence = new String ("");
-				String gene = genes[1];
+				if (word.charAt(i)=='M')
+				{
+					M = true;
+					
+				}
+				else if (word.charAt(i)=='U')
+				{
+					U = true;
+					
+				}
 
-				if (sequence.matches("[AGTC]+")) dna.write(gene + ": " + sequence + "\n");
-				else if (sequence.matches("[AGUC]+")) rna.write(gene + ": " + sequence + "\n");
-				else if (sequence.contains("M")) protein.write(gene + ": " + sequence + "\n");
+			}
+			
+			if (M)
+			{
+				outputProtein.printf("%-5s",genes[letters]+": ");
+				outputProtein.println(word);
+			}
+			else if(U)
+			{
+				outputRNA.printf("%-5s",genes[letters]+": ");
+				outputRNA.println(word);
+			}
+			else
+			{
+				outputDNA.printf("%-5s",genes[letters]+": ");
+				outputDNA.println(word);
 			}
 
-			scanner.close(); 
-			dna.close(); 
-			rna.close(); 
-			protein.close();
+			M = false;
+			U = false;
+
 		}
-		catch (IOException e) 
-		{
-		
-		}
+		outputDNA.close();
+		outputRNA.close();
+		outputProtein.close();
+
 	}
+
+
+
+
+
 }
