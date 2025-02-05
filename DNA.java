@@ -26,8 +26,6 @@ public class DNA {
 	{
 		DNA d = new DNA();
 		d.runIt();
-
-
 	}
 	public void runIt()
 
