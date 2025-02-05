@@ -87,23 +87,20 @@ public class DNA {
 
 		while (input.hasNext())
 		{
-			num = input.next();
-			num = num.charAt(0) +  "";
+			num = input.next().charAt(0) +  "";
 			letters = Integer.parseInt(num);
 
-			word = input.nextLine();
-			word.trim();
+			word = input.nextLine().trim();
 			for(int i = 0; i < word.length(); i++)
 			{
 				if (word.charAt(i)=='M')
 				{
-					protein= true;
+					protein = true;
 					
 				}
 				else if (word.charAt(i) == 'U')
 				{
 					RNA = true;
-					
 				}
 
 			}
@@ -115,12 +112,12 @@ public class DNA {
 			}
 			else if(RNA)
 			{
-				outputRNA.printf("%-5s",genes[letters] + ": ");
+				outputRNA.printf("%-5s", genes[letters] + ": ");
 				outputRNA.println(word);
 			}
 			else
 			{
-				outputDNA.printf("%-5s",genes[letters] + ": ");
+				outputDNA.printf("%-5s", genes[letters] + ": ");
 				outputDNA.println(word);
 			}
 
