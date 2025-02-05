@@ -1,4 +1,7 @@
-
+/* Aarav Goyal
+ * 2/04/2025
+ * DNA.java
+ */
 import java.util.Scanner;
 import java.io.*;
 public class DNA {
