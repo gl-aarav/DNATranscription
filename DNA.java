@@ -1,5 +1,5 @@
 /* Aarav Goyal
- * 2/04/2025
+ * 02/04/2025
  * DNA.java
  */
 import java.util.Scanner;
